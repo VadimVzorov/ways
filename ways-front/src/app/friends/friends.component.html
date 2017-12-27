@@ -1,0 +1,12 @@
+<h2>Friends</h2>
+<app-friends-search (start)="onStart($event)" (close)="onStop($event)"></app-friends-search>
+<ul *ngIf="query === ''" >
+    <li *ngFor="let friend of friends">
+        {{friend.firstName}} {{friend.lastName}}
+        <app-add-remove-friends
+            [friend]="friend"
+        ></app-add-remove-friends>
+    </li>
+</ul>
+<br>
+<app-bottom-menu></app-bottom-menu>

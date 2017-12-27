@@ -1,0 +1,13 @@
+<h2>Cities</h2>
+    <app-cities-search
+        (start)="onStart($event)"
+        (close)="onStop($event)">
+    </app-cities-search>
+<ul *ngIf="query === ''">
+    <li *ngFor="let city of cities">
+        {{city.name}}
+        <app-add-remove-cities [city]="city"></app-add-remove-cities>
+    </li>
+</ul>
+<br>
+<app-bottom-menu></app-bottom-menu>

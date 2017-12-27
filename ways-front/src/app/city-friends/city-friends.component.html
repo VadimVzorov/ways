@@ -1,0 +1,8 @@
+<div *ngIf="friends">
+   Check ways from your friends:
+  <ul>
+    <li *ngFor="let friend of friends">
+      {{friend.firstName}} {{friend.lastName}}
+    </li>
+  </ul>
+</div>

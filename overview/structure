@@ -1,0 +1,49 @@
+                         Login
+                            |
+                    City search screen (Where would you like to go?)
+                    - seach cities
+                    - select cities
+                            |
+
+Friends       -            Places           -           Notifications (later)
+   |                        |                                 |
+List of friends         List of Cities                  List of all notifications
+- search                - Search                        - delete notifications
+- add                   - add
+- remove                - remove
+- view profile *        - view city
+   |                        |
+List of Cities          List of places
+(friend profile)        (city profile)
+(visited by friend)     (display list of friends also)
+- view city*            - search
+   |                    - add
+List of Places          - remove
+- Add all               - mark as visited
+- Add
+
+//////////////////////////////////////////////////////////////
+
+Components List:
+Login --> Login User
+Home --> City Search bar
+Bottom Menu --> Buttons to main sections: Friends, Places, Notifications
+
+//////////////////////////////////////////////////////////////
+Server requests:
+
+Cities
+
+/cities/search?cities=something => return filtered list of cities
+/cities/add => add new city to user's profile
+/cities/remove => remove city from user's profile
+
+Frineds
+
+/friends => return friends list for the current user who has 'following' true
+/friends/search?s={{search query}} => return list of people matching search
+
+//////////////////////////////////////////////////////////////
+Django rest
+
+

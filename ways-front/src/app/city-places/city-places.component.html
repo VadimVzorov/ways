@@ -1,0 +1,24 @@
+<div *ngIf=data>
+  <h3>Share your Way around {{data.name}} with {{data.first_name}}</h3>
+  
+  <p>Name:
+    <input type="text" placeholder="Your name">
+  </p>
+  
+  <app-places-search (start)="onStart($event)" (stop)="onStop($event)"></app-places-search>
+  <ul *ngIf="query === ''">
+    <li *ngFor="let place of places">
+      {{place.name}}
+      <br> {{place.description}}
+      <div *ngIf="place.recommendation.recommended">
+        Recommended by:
+        <br>
+      </div>
+    </li>
+  </ul>
+
+  <br>
+  <button>Share</button>
+  <app-bottom-menu></app-bottom-menu>
+</div>
+

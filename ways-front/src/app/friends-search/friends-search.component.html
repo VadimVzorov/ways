@@ -1,0 +1,13 @@
+<input type="text" placeholder="Enter friend's name" 
+[(ngModel)]="query" #searchBox name="friend" (keyup)=search(searchBox.value) required>
+
+<div class="suggestions" *ngIf="filteredFriends.length > 0">
+  Search results:
+  <ul>
+    <li *ngFor="let friend of filteredFriends">
+      <div>{{ friend.firstName }} {{ friend.lastName }}</div>
+      <app-add-remove-friends [friend]="friend"></app-add-remove-friends>
+    </li>
+  </ul>
+</div>
+<br>

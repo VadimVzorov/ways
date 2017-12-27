@@ -1,0 +1,15 @@
+
+<input type="text" placeholder="Enter a City Name" [(ngModel)]="query" name="city" required #searchBox 
+(keyup)=search(searchBox.value)
+(change)=search(searchBox.value)>
+<div class="suggestions" *ngIf="filteredCities.length > 0">
+  <ul>
+    <li *ngFor="let city of filteredCities">
+      <div (click)=selectCity(city.id)>{{ city.name }}</div>
+        <!-- <app-add-remove-cities
+        [city]="city"
+        ></app-add-remove-cities> -->
+    </li>
+  </ul>
+</div>
+

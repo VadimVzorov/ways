@@ -1,0 +1,14 @@
+<input type="text" placeholder="Search for a Place" [(ngModel)]="query" name="place" required #searchBox (keyup)=search(searchBox.value)>
+<div class="suggestions" *ngIf="filteredPlaces.length > 0">
+  <ul>
+    <li *ngFor="let place of filteredPlaces">
+      <div (click)=selectPlace(place)>{{ place.name }}</div>
+       {{place.description}}
+      <div *ngIf="place.recommendation.recommended">
+        Recommended by:
+        <br> {{place.recommendation.firstName}} {{place.recommendation.lastName}}
+      </div>
+      <app-add-remove-places [place]="place"></app-add-remove-places>
+    </li>
+  </ul>
+</div>
