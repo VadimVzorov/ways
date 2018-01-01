@@ -1,13 +1,13 @@
 export class Place {
 
     constructor(
-        public id: number,
-        public following: boolean,
+        public google_place_idd: number,
         public name: string,
-        public categoty: string,
-        public description: string,
-        public picture: string,
-        public recommendation: Object
+        public types: Array<string>,
+        public formatted_address: string,
+        public lat: string,
+        public lng: string,
+        public added: boolean,
     ) { }
 
 }

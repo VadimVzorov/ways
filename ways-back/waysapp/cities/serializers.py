@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from cities.models import City, User_data, Link, Recommendations
+from cities.models import City, User_data, Link
 
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,8 +15,3 @@ class LinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Link
         fields = ('city', 'user')
-
-class RecommendationsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Recommendations
-        fields = ('link')

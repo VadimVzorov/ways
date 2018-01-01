@@ -183,4 +183,4 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 social_auth_client_id = os.environ.get('social_auth_client_id')
 social_auth_client_secret = os.environ.get('social_auth_client_secret')
 
-GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
+GOOGLE_API_KEY = os.environ.get('GOOGLE_KEY')

@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.conf import settings
 
-from cities.models import City, User_data, Link, Recommendations
+from cities.models import City, User_data, Link, Recommendation
 from django.contrib.auth.models import User
 from cities.serializers import CitySerializer, UserDataSerializer
 
@@ -12,6 +13,8 @@ from waysapp.custom_authentication import MyCustomAuthentication
 from rest_framework.permissions import AllowAny
 
 from django.db.models.signals import post_save
+
+from cities.places_search import search_google_places
 
 # return list of cities based on user input
 class ListCities(APIView):
@@ -45,7 +48,7 @@ class AddCity(APIView):
             #create link for the user
             l = Link.objects.create(city=city, user=u)
             # update Recommendations
-            r = Recommendations.objects.create(link=l)
+            r = Recommendation.objects.create(link=l)
         #serialize response
         data = {
             'name': city.name,
@@ -79,4 +82,15 @@ class FindLink(APIView):
 
 #get places from Google Places API
 class FindPlace(APIView):
-    pass
+    authentication_classes = (MyCustomAuthentication,)
+    permission_classes = (AllowAny,)
+    def get(self, request, format=None):
+        #get search query data from the request
+        lat = request.GET['lat']
+        lng = request.GET['lng']
+        query = request.GET['query']
+        #radius variable
+        radius = '10000'
+        #get response from Google Places API
+        response = search_google_places(lat,lng,query,radius)
+        return JsonResponse(response, safe=False)

@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';
 
@@ -7,6 +7,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { Place } from '../city-places/place';
+import { LinkData } from '../city-places/link_data';
 import { PlacesSearchService } from './places-search.service';
 
 @Component({
@@ -18,6 +19,7 @@ import { PlacesSearchService } from './places-search.service';
 export class PlacesSearchComponent implements OnInit {
 
   filteredPlaces: Place[] = [];
+  @Input() linkData: LinkData;
 
   // Output events to start search or stop it based on user input
   @Output() start: EventEmitter<any> = new EventEmitter();
@@ -35,7 +37,7 @@ export class PlacesSearchComponent implements OnInit {
     // listen to 'userInput' Subject (user typing search) and calling
     // filterCities function with a delay
     this.userInput
-      .debounceTime(1000)
+      .debounceTime(1500)
       .distinctUntilChanged()
       .subscribe(query => {
         // send request to server to perform search
@@ -52,12 +54,12 @@ export class PlacesSearchComponent implements OnInit {
   // send request to server to search for cities
   displayPlaces(query: string): void {
     if (query !== '') {
-      this.placesSearchService.getPlaces(query)
+      this.placesSearchService.getPlaces(query, this.linkData)
         .subscribe(places => {
           // send event that user is searching
           this.start.emit(query);
           // update list of cities with search results
-          this.filteredPlaces = places;
+          this.filteredPlaces = places.results;
         });
     } else {
       // send event that user stopped searching

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
 
 from pygments.lexers import get_all_lexers
@@ -19,11 +20,36 @@ class City(models.Model):
     lng = models.DecimalField(max_digits=10, decimal_places=5)
     users = models.ManyToManyField(User_data, through='Link')
 
+class Place(models.Model):
+    google_place_id = models.CharField(max_length=200)
+    formatted_address = models.CharField(max_length=200)
+    lat = models.DecimalField(max_digits=10, decimal_places=5)
+    lng = models.DecimalField(max_digits=10, decimal_places=5)
+    name = models.CharField(max_length=100)
+    types = ArrayField(models.CharField(max_length=100), default=list())
+
 class Link(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     user = models.ForeignKey(User_data, on_delete=models.CASCADE)
+    places = models.ManyToManyField(Place, through='Recommendation')
 
-class Recommendations(models.Model):
+class Recommendation(models.Model):
+    place = models.ForeignKey(Place, blank=True)
     link = models.ForeignKey(Link)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

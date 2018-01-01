@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 import { Place } from '../city-places/place';
+import { LinkData } from '../city-places/link_data';
 
 @Injectable()
 export class PlacesSearchService {
@@ -16,12 +17,15 @@ export class PlacesSearchService {
     ) { }
 
     // url for api request
-    APIurl = 'http://localhost:8882/places/search';
+    APIurl = 'http://localhost:8000/places/search';
 
     // Send request to the server with search paramaters
-    getPlaces(query): any {
+    getPlaces(query, linkData: LinkData): any {
         const search_params = new HttpParams()
-            .set('place', query);
+            .set('query', query)
+            .set('lat', linkData.lat)
+            .set('lng', linkData.lng);
+
 
         const response = this.http.get(
             this.APIurl, { params: search_params });

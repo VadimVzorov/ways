@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CityPlacesService } from './city-places.service';
 import { LinkData } from './link_data';
+import { Place } from './place';
 
 @Component({
   selector: 'app-city-places',
@@ -13,14 +14,15 @@ import { LinkData } from './link_data';
 export class CityPlacesComponent implements OnInit {
 
   data: LinkData;
+  recomme
 
   constructor(
     private cityPlacesService: CityPlacesService,
   ) { 
     this.cityPlacesService.link_data
       .subscribe(data => {
-        this.data = data
-        console.log(data.name)
+        this.data = data;
+        console.log(data)
       });
   }
 

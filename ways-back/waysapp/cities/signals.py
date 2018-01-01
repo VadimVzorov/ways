@@ -1,4 +1,4 @@
-from cities.models import City, User_data, Link, Recommendations
+from cities.models import User_data
 from django.contrib.auth.models import User
 
 from django.dispatch import receiver

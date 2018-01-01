@@ -18,17 +18,18 @@ export class AddRemovePlacesComponent {
   ) { }
 
   add(): void {
-    this.addRemovePlacesService.addPlace(this.place.id)
-      .subscribe(place => {
-        this.place.following = place.following;
-      });
+    
+    // this.addRemovePlacesService.addPlace(this.place.id)
+    //   .subscribe(place => {
+    //     this.place.following = place.following;
+    //   });
   }
 
   remove(): void {
-    this.addRemovePlacesService.removePlace(this.place.id)
-      .subscribe(place => {
-        this.place.following = place.following;
-      });
-  }
+  //   this.addRemovePlacesService.removePlace(this.place.id)
+  //     .subscribe(place => {
+  //       this.place.following = place.following;
+  //     });
+  // }
 
 }
