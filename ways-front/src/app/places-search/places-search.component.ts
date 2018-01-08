@@ -18,6 +18,7 @@ import { PlacesSearchService } from './places-search.service';
 })
 export class PlacesSearchComponent implements OnInit {
 
+  recommendations: Place[] = [];
   filteredPlaces: Place[] = [];
   @Input() linkData: LinkData;
 
@@ -37,7 +38,7 @@ export class PlacesSearchComponent implements OnInit {
     // listen to 'userInput' Subject (user typing search) and calling
     // filterCities function with a delay
     this.userInput
-      .debounceTime(1500)
+      .debounceTime(1000)
       .distinctUntilChanged()
       .subscribe(query => {
         // send request to server to perform search
@@ -54,7 +55,7 @@ export class PlacesSearchComponent implements OnInit {
   // send request to server to search for cities
   displayPlaces(query: string): void {
     if (query !== '') {
-      this.placesSearchService.getPlaces(query, this.linkData)
+      this.placesSearchService.getPlaces(query, this.linkData, this.recommendations)
         .subscribe(places => {
           // send event that user is searching
           this.start.emit(query);
@@ -67,10 +68,16 @@ export class PlacesSearchComponent implements OnInit {
       // empty the list of cities
       this.filteredPlaces = [];
     }
-  }
+  } 
 
-  selectPlace(place_id) {
-    console.log(place_id)
+  addPlace(place) {
+    this.recommendations.push(place);
+    // remove place from filteredPlaces
+    this.filteredPlaces.splice(
+      this.filteredPlaces.indexOf(place),
+      1
+    );
+
   }
 
 }

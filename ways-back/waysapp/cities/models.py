@@ -34,7 +34,7 @@ class Link(models.Model):
     places = models.ManyToManyField(Place, through='Recommendation')
 
 class Recommendation(models.Model):
-    place = models.ForeignKey(Place, blank=True)
+    place = models.ForeignKey(Place)
     link = models.ForeignKey(Link)
 
 

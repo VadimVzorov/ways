@@ -14,11 +14,10 @@ import { Place } from './place';
 export class CityPlacesComponent implements OnInit {
 
   data: LinkData;
-  recomme
 
   constructor(
     private cityPlacesService: CityPlacesService,
-  ) { 
+  ) {
     this.cityPlacesService.link_data
       .subscribe(data => {
         this.data = data;

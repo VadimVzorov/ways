@@ -6,11 +6,6 @@
   </p>
   
   <app-places-search [linkData]="data"></app-places-search>
-  <ul *ngIf="query == ''">
-    <li *ngFor="let place of places">
-      {{place.name}}
-    </li>
-  </ul>
 
   <br>
   <button>Share</button>
