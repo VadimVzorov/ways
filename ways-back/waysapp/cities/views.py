@@ -21,7 +21,9 @@ class ListCities(APIView):
 
     def get(self, request, format=None):
         city = request.GET.__getitem__('city').title()  # get city url parameter
-        cities = City.objects.filter(name__startswith=city)[:5] # filter results and limit response to 5
+        cities = City.objects.filter(
+            name__startswith=city)[:
+                                   5]  # filter results and limit response to 5
         serializer = CitySerializer(cities, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -52,10 +54,11 @@ class AddCity(APIView):
         #serialize response
         data = {
             'name': city.name,
-            'link': Link.objects.get(user_id=request.user.id, city_id=city_id).id
+            'link': Link.objects.get(user_id=request.user.id,
+                                     city_id=city_id).id
         }
         return JsonResponse(data, safe=False)
-    
+
 
 #take link_id --> find link and return info to frontend: city name, user name, city lt ln
 class FindLink(APIView):
@@ -94,3 +97,10 @@ class FindPlace(APIView):
         #get response from Google Places API
         response = search_google_places(lat,lng,query,radius)
         return JsonResponse(response, safe=False)
+
+
+class Test(APIView):
+    authentication_classes = (MyCustomAuthentication,)
+    permission_classes = (AllowAny,)
+    def post(self, request):
+        import pdb ; pdb.set_trace()

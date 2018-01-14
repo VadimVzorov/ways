@@ -36,20 +36,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'corsheaders',
-    'django_pdb',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'cities.apps.CitiesConfig',
-    'social_django',
-    'rest_framework_social_oauth2',
-    'oauth2_provider',
+    'corsheaders', 'django_pdb', 'django.contrib.admin', 'django.contrib.auth',
+    'django.contrib.contenttypes', 'django.contrib.sessions',
+    'django.contrib.messages', 'django.contrib.staticfiles', 'rest_framework',
+    'rest_framework.authtoken', 'cities.apps.CitiesConfig', 'social_django',
+    'rest_framework_social_oauth2', 'oauth2_provider', 'django_extensions',
+    'werkzeug'
 ]
 
 MIDDLEWARE = [
@@ -63,7 +55,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_pdb.middleware.PdbMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
-
     'waysapp.middleware.LoginMiddleware',
 ]
 
@@ -123,30 +114,34 @@ else:
         }
     }
 
-
+# Fill in your cloud bucket and switch which one of the following 2 lines
+# is commented to serve static content from GCS
+# STATIC_URL = 'https://storage.googleapis.com/<your-gcs-bucket>/static/'
+STATIC_URL = 'https://storage.googleapis.com/ways-python2/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-# CORS_ORIGIN_WHITELIST = (
-#     'localhost:4200',
-#     'localhost:8000'
-# )
+# CORS_ORIGIN_WHITELIST = ('localhost:4200', 'localhost:8000')
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -204,5 +199,9 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 # data for social auth requests
 social_auth_client_id = os.environ.get('social_auth_client_id')
 social_auth_client_secret = os.environ.get('social_auth_client_secret')
+
+CLIENT_ID = os.environ.get('client_id')
+CLIENT_SECRET = os.environ.get('client_secret')
+
 
 GOOGLE_API_KEY = os.environ.get('GOOGLE_KEY')

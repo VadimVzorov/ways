@@ -30,6 +30,6 @@ export class AddRemovePlacesComponent {
   //     .subscribe(place => {
   //       this.place.following = place.following;
   //     });
-  // }
+  }
 
 }

@@ -9,9 +9,11 @@ LEXERS = [item for item in get_all_lexers() if item[1]]
 LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
 STYLE_CHOICES = sorted((item, item) for item in get_all_styles())
 
+
 #add it on sign up
 class User_data(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
 
 class City(models.Model):
     country = models.CharField(max_length=100)
@@ -34,22 +36,5 @@ class Link(models.Model):
     places = models.ManyToManyField(Place, through='Recommendation')
 
 class Recommendation(models.Model):
-    place = models.ForeignKey(Place)
-    link = models.ForeignKey(Link)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    link = models.ForeignKey(Link, on_delete=models.CASCADE)

@@ -1,17 +1,6 @@
-runtime: python27
-api_version: 1
-threadsafe: yes
+runtime: python
+env: flex
+entrypoint: gunicorn -b :$PORT waysapp.wsgi
 
-handlers:
-- url: /static
-  static_dir: static/
-- url: .*
-  script: mysite.wsgi.application
-
-# Only pure Python libraries can be vendored
-# Python libraries that use C extensions can
-# only be included if they are part of the App Engine SDK 
-# Using Third Party Libraries: https://cloud.google.com/appengine/docs/python/tools/using-libraries-python-27
-libraries:
-- name: MySQLdb
-  version: 1.2.5
+beta_settings:
+    cloud_sql_instances: ways-python2:europe-west1:waysapp

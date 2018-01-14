@@ -17,7 +17,7 @@ export class LoginService {
         private zone: NgZone
     ) { }
 
-    APIurl = 'http://localhost:8000/auth/convert-token';
+    APIurl = 'http://localhost:8000/auth/convert-token?t=1';
 
     login(provider): any {
         if (provider === 'facebook') {
