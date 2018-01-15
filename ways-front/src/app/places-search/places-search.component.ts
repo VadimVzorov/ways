@@ -22,9 +22,9 @@ export class PlacesSearchComponent implements OnInit {
   filteredPlaces: Place[] = [];
   @Input() linkData: LinkData;
 
-  // Output events to start search or stop it based on user input
-  @Output() start: EventEmitter<any> = new EventEmitter();
-  @Output() stop: EventEmitter<any> = new EventEmitter();
+  // Output events to send list of recommendations to the parent component
+  @Output() recommendationAdded = new EventEmitter<Place[]>();
+  // @Output() stop: EventEmitter<any> = new EventEmitter();
 
   private userInput = new Subject<string>();
 
@@ -57,14 +57,10 @@ export class PlacesSearchComponent implements OnInit {
     if (query !== '') {
       this.placesSearchService.getPlaces(query, this.linkData, this.recommendations)
         .subscribe(places => {
-          // send event that user is searching
-          this.start.emit(query);
           // update list of cities with search results
           this.filteredPlaces = places.results;
         });
     } else {
-      // send event that user stopped searching
-      this.stop.emit(null);
       // empty the list of cities
       this.filteredPlaces = [];
     }
@@ -77,7 +73,7 @@ export class PlacesSearchComponent implements OnInit {
       this.filteredPlaces.indexOf(place),
       1
     );
-
+    this.recommendationAdded.emit(this.recommendations);
   }
 
 }

@@ -8,13 +8,16 @@ import { Subject } from 'rxjs/Subject';
 
 import { City } from '../cities-search/city';
 import { LinkData } from './link_data';
+import { Place } from './place';
 
 @Injectable()
 export class CityPlacesService {
 
     link_id: string;
     link_data = new Subject<any>();
+    recommendations: Place[];
     APIurl = 'http://localhost:8000/link/search';
+    APIsubmiturl = 'url';
 
     constructor(
         private route: ActivatedRoute,
@@ -53,6 +56,17 @@ export class CityPlacesService {
         );
 
         return response;
+    }
+
+    // get recommendations from places-search
+    recommendationAdded(places: Place[]) {
+        this.recommendations = places;
+        console.log(places)
+    }
+
+    // submit recommendation (way)
+    submitWay() {
+        
     }
 
 

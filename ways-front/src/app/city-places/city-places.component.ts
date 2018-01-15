@@ -4,6 +4,7 @@ import { CityPlacesService } from './city-places.service';
 import { LinkData } from './link_data';
 import { Place } from './place';
 
+
 @Component({
   selector: 'app-city-places',
   templateUrl: './city-places.component.html',
@@ -21,7 +22,6 @@ export class CityPlacesComponent implements OnInit {
     this.cityPlacesService.link_data
       .subscribe(data => {
         this.data = data;
-        console.log(data)
       });
   }
 
@@ -29,13 +29,9 @@ export class CityPlacesComponent implements OnInit {
     this.cityPlacesService.getLinkInfo();
   }
 
-  // onStart(query: string) {
-  //   this.query = query;
-  // }
+  recommendationAdded(places: Place[]) {
+    this.cityPlacesService.recommendationAdded(places);
+  }
 
-  // onStop() {
-  //   console.log('stop');
-  //   this.query = '';
-  // }
 
 }

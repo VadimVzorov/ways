@@ -4,8 +4,11 @@
   <p>Name:
     <input type="text" placeholder="Your name">
   </p>
-  
-  <app-places-search [linkData]="data"></app-places-search>
+  <p>Way Name:
+    <input type="text" placeholder="List's name">
+  </p>
+  <app-places-search [linkData]="data"
+   (recommendationAdded)="recommendationAdded($event)"></app-places-search>
 
   <br>
   <button>Share</button>

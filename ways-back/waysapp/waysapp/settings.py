@@ -55,7 +55,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_pdb.middleware.PdbMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
-    'waysapp.middleware.LoginMiddleware',
 ]
 
 ROOT_URLCONF = 'waysapp.urls'

@@ -49,8 +49,9 @@ class AddCity(APIView):
         else:
             #create link for the user
             l = Link.objects.create(city=city, user=u)
-            # update Recommendations
-            r = Recommendation.objects.create(link=l)
+            #should be updated when accessing recommendation
+            # # update Recommendations
+            # r = Recommendation.objects.create(link=l)
         #serialize response
         data = {
             'name': city.name,
@@ -98,9 +99,12 @@ class FindPlace(APIView):
         response = search_google_places(lat,lng,query,radius)
         return JsonResponse(response, safe=False)
 
+#add list of recommendations
+class AddRecommendation(APIView):
+    authentication_classes = (MyCustomAuthentication, )
+    permission_classes = (AllowAny, )
+    def post(self, request, format=None):
+        #get link id
+        #get list of places
+        pass
 
-class Test(APIView):
-    authentication_classes = (MyCustomAuthentication,)
-    permission_classes = (AllowAny,)
-    def post(self, request):
-        import pdb ; pdb.set_trace()
